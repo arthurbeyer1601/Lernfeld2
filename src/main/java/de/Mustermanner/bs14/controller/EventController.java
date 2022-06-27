@@ -1,6 +1,7 @@
 package de.Mustermanner.bs14.controller;
 
 import de.Mustermanner.bs14.Event;
+import de.Mustermanner.bs14.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -25,11 +26,6 @@ public class EventController {
         return repository.getEvents();
     }
 
-    @GetMapping("/getBy/{filter}")
-    @ResponseStatus(HttpStatus.OK)
-    public List<Event> getEvents(@PathVariable String filter) {
-        return repository.getEventsByFilter(filter);
-    }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -53,13 +49,6 @@ public class EventController {
     public Event createTestEvent() {
         return repository.createTestEvent();
     }
-
-    @PatchMapping("/changeStatus")
-    @ResponseStatus(HttpStatus.OK)
-    public Event changeStatusOfEvent(@RequestBody ChangeStatusRequest request) {
-        return repository.changeStatusOfEvent(request.getId(),request.getNewStatus());
-    }
-
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)

@@ -26,8 +26,14 @@ public class EventService {
         return repository.findById(id);
     }
 
+    public Event createTestEvent() {
+        Event newEvent = new Event(20,3);
+        repository.save(newEvent);
+        return newEvent;
+    }
+
     public Event createEvent(Event Event) {
-        Event newEvent = new Event();
+        Event newEvent = new Event(Event.getDistance(),Event.getCostPerKilometer());
         repository.save(newEvent);
         return newEvent;
     }

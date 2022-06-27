@@ -1,5 +1,7 @@
 package de.Mustermanner.bs14.config;
 
-@EventConfiguration
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
 public class EventConfiguration {
 }
