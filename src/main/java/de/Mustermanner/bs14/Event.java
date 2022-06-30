@@ -1,23 +1,22 @@
 package de.Mustermanner.bs14;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.UUID;
 
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Document(collection = "event")
 public class Event {
 
     @Id
     private String id;
-    private float distance;
+    private float distance = 0;
     private float costPerKilometer = 5;
     private float totalCost;
 

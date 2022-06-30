@@ -4,12 +4,15 @@ import de.Mustermanner.bs14.Event;
 import de.Mustermanner.bs14.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("event")
 public class EventController {
 
@@ -22,9 +25,32 @@ public class EventController {
 
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
-    public List<Event> getEvents() {
-        return repository.getEvents();
+    public String getEvents(Model model) {
+        model.addAttribute("events",repository.getEvents());
+        model.addAttribute("newEvent", Event.builder().build());
+        return "new-event";
     }
+
+    @PostMapping("/deleteEvent")
+    public String deleteConfig(
+            @ModelAttribute Event event, BindingResult errors, Model model) {
+        repository.deleteEvent(event.getId());
+        return "redirect:/event";
+    }
+
+    @PostMapping("/createEvent")
+    public String createConfig(
+            @ModelAttribute Event event, BindingResult errors, Model model) {
+        repository.createEvent(event);
+        return "redirect:/event";
+    }
+
+
+
+
+
+
+
 
 
     @GetMapping("/{id}")
