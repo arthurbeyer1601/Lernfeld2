@@ -1,0 +1,64 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" th:href="@{/styles/design.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Config</title>
+
+</head>
+
+<body>
+
+<h1>Aktuelle Events</h1>
+
+
+<div>
+    <div>
+        <div>ID</div>
+        <div>Distance</div>
+        <div>Cost</div>
+        <div>Delete</div>
+    </div>
+
+    <div th:each="event: ${events}">
+
+        <div th:text="${event.id}"></div>
+        <div th:text="${event.distance}"></div>
+        <div th:text="${event.totalCost}"></div>
+        <div>
+            <div>
+                <form action="#" th:action="@{/event/deleteEvent}" th:object="${eventToDelete}"
+                      method="post">
+                    <input type="hidden" name="id" th:value="${event.id}">
+                    <button type="submit">
+                        <span>Delete</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h1>Neue Events</h1>
+
+<form action="#" th:action="@{/event/createEvent}" th:object="${newEvent}" method="post">
+    <div>
+        <div>
+            <input id="distance" placeholder="test" type="text"
+                   th:field="*{distance}" />
+            <label for="distance">Distance</label>
+        </div>
+        <div>
+            <input id="costPerKilometer" placeholder="test" type="text"
+                   th:field="*{costPerKilometer}" />
+            <label for="costPerKilometer" >Cost per Kilometer</label>
+        </div>
+    </div>
+    <button type="submit">
+        <span>Save</span>
+    </button>
+</form>
+
+</body>
+
+</html>
