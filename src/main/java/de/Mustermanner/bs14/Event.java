@@ -18,13 +18,13 @@ public class Event {
     private String id;
     private float distance = 0;
     private float costPerKilometer = 5;
-    private float totalCost;
+    private double totalCost;
 
     public Event(float distance, float costPerKilometer) {
         this.id = UUID.randomUUID().toString();
         this.distance = distance;
         this.costPerKilometer = costPerKilometer;
-        this.totalCost = distance*costPerKilometer;
+        this.totalCost = Math.round(distance*costPerKilometer * 100.0) / 100.0;
     }
 
 }
