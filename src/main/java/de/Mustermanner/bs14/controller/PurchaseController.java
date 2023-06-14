@@ -65,7 +65,7 @@ public class PurchaseController {
     List<Purchase> purchasesWithShareName = new ArrayList<>();
     System.out.println(id);
     for (Purchase p : purchases) {
-      if (p.getShareName().equals(id)) {
+      if (p.getShareName().equalsIgnoreCase(id)) {
         purchasesWithShareName.add(p);
       }
     }
